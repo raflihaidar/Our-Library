@@ -1,22 +1,32 @@
-export const getBookData = (req, res) => {
+import {
+  getDataFromDb,
+  addNewDataFromDb,
+  deleteData,
+  updateData,
+} from "../models/books.js";
+
+export const getBookData = async (req, res) => {
   try {
+    const [data] = await getDataFromDb();
     res
       .json({
-        message: "Get Data Book Success",
+        data: data,
       })
       .status(200);
   } catch (error) {
     res
       .json({
         message: "Server Error",
+        serverMessage: error,
       })
       .status(404);
   }
 };
 
-export const addNewBook = (req, res) => {
+export const addNewBook = async (req, res) => {
   const { body } = req;
   try {
+    await addNewDataFromDb(body);
     res
       .json({
         data: body,
@@ -27,15 +37,17 @@ export const addNewBook = (req, res) => {
     res
       .json({
         message: "Server Error",
+        serverMessage: error,
       })
       .status(404);
   }
 };
 
-export const deleteBook = (req, res) => {
+export const deleteBook = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
   try {
+    await deleteData(id);
     res
       .json({
         data: body,
@@ -46,15 +58,17 @@ export const deleteBook = (req, res) => {
     res
       .json({
         message: "Server Error",
+        serverMessage: error,
       })
       .status(404);
   }
 };
 
-export const editBook = (req, res) => {
+export const editBook = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
   try {
+    await updateData(body, id);
     res
       .json({
         data: body,

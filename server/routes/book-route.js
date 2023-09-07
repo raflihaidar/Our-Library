@@ -1,10 +1,10 @@
-const express = require("express");
+import express from "express";
 import {
   getBookData,
   addNewBook,
   editBook,
   deleteBook,
-} from "../controller/book-controller";
+} from "../controller/book-controller.js";
 
 const router = express.Router();
 
