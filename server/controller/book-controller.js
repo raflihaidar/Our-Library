@@ -8,11 +8,11 @@ import {
 export const getBookData = async (req, res) => {
   try {
     const [data] = await getDataFromDb();
-    res
-      .json({
-        data: data,
-      })
-      .status(200);
+    res.render("main", {
+      title: "Halaman utama",
+      layout: "layout/main-layout",
+      data,
+    });
   } catch (error) {
     res
       .json({
@@ -24,15 +24,9 @@ export const getBookData = async (req, res) => {
 };
 
 export const addNewBook = async (req, res) => {
-  const { body } = req;
+  const { body, file } = req;
   try {
-    await addNewDataFromDb(body);
-    res
-      .json({
-        data: body,
-        message: "Success add new book",
-      })
-      .status(200);
+    await addNewDataFromDb(body, file);
   } catch (error) {
     res
       .json({

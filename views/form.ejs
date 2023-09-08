@@ -1,18 +1,12 @@
 <form
-  method="post"
-  enctype="multipart/form-data"
+  method="POST"
   class="w-screen my-10"
   action="/books"
+  enctype="multipart/form-data"
 >
   <input type="text" name="title" placeholder="add title" />
   <input type="text" name="author" placeholder="add author" />
-  <input type="file" name="img" />
-  <textarea
-    name="description"
-    id=""
-    cols="30"
-    rows="10"
-    class="border-2"
-  ></textarea>
+  <textarea name="description" cols="30" rows="10" class="border-2"></textarea>
+  <input type="file" name="img" id="img" accept="image/*" />
   <button class="bg-slate-400">Send</button>
 </form>

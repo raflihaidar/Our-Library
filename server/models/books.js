@@ -5,7 +5,7 @@ export const getDataFromDb = () => {
   return dbPool.execute(SQLquery);
 };
 
-export const addNewDataFromDb = (body) => {
+export const addNewDataFromDb = (body, file) => {
   const SQLquery = `INSERT INTO directory_books.book
                     (
                       title,
@@ -17,7 +17,7 @@ export const addNewDataFromDb = (body) => {
                       '${body.title}', 
                       '${body.author}',
                       '${body.description}',
-                      '${body.img}'
+                      '${file.filename}'
                     )`;
   return dbPool.execute(SQLquery);
 };

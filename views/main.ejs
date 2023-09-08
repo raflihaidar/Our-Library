@@ -6,12 +6,16 @@
     <%- include("../public/icon/search-icon") %>
   </div>
 
-  <div class="w-[95%] mx-auto my-5">
-    <p class="font-bold text-2xl">List Book</p>
-    <% data.forEach((item) => { %>
-    <img src="<%= item.img %>" alt="gambar" />
-    <p><%= item.title %></p>
-    <p><%= item.author %></p>
-    <% }) %>
+  <div class="w-[95%] mx-auto">
+    <p class="font-bold text-2xl my-10">List Book</p>
+    <div class="w-full grid grid-cols-5 gap-x-10">
+      <% data.forEach((item) => { %>
+      <div class="text-center">
+        <img src="images/<%= item.img %>" alt="gambar" class="w-[300px]" />
+        <p class="font-bold mt-5"><%= item.title %></p>
+        <p><%= item.author %></p>
+      </div>
+      <% }) %>
+    </div>
   </div>
 </div>
