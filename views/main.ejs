@@ -1,4 +1,4 @@
-<div class="w-screen">
+<div class="w-screen relative">
   <div
     class="flex justify-between items-center bg-white w-2/5 p-4 rounded-full shadow-md mx-auto my-10"
   >
@@ -10,12 +10,19 @@
     <p class="font-bold text-2xl my-10">List Book</p>
     <div class="w-full grid grid-cols-5 gap-x-10">
       <% data.forEach((item) => { %>
-      <div class="text-center">
+      <div class="text-center" onclick="location.href='/<%=item.id %>'">
         <img src="images/<%= item.img %>" alt="gambar" class="w-[300px]" />
         <p class="font-bold mt-5"><%= item.title %></p>
         <p><%= item.author %></p>
       </div>
       <% }) %>
     </div>
+  </div>
+
+  <div
+    class="absolute -bottom-10 right-10 bg-orange-400 p-3 text-white cursor-pointer rounded-full hover:scale-105 transition-transform"
+    onclick="location.href='/add-new-data'"
+  >
+    <%- include("../public/icon/plus-icon") %>
   </div>
 </div>

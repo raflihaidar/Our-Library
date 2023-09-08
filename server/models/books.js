@@ -5,6 +5,11 @@ export const getDataFromDb = () => {
   return dbPool.execute(SQLquery);
 };
 
+export const singleDataFromDb = (id) => {
+  const SQLquery = `SELECT * FROM directory_books.book WHERE id = ${id};`;
+  return dbPool.execute(SQLquery);
+};
+
 export const addNewDataFromDb = (body, file) => {
   const SQLquery = `INSERT INTO directory_books.book
                     (

@@ -4,7 +4,11 @@ import Bookrouter from "./routes/book-route.js";
 import { logRequest } from "./middleware/log.js";
 import bodyParser from "body-parser";
 import "dotenv/config";
-import { addNewBook, getBookData } from "./controller/book-controller.js";
+import {
+  addNewBook,
+  getBookData,
+  getDetailBookData,
+} from "./controller/book-controller.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -29,6 +33,8 @@ app.get("/add-new-data", (req, res) => {
     layout: "layout/main-layout",
   });
 });
+
+app.get("/:id", getDetailBookData);
 
 app.post("/books", addNewBook);
 

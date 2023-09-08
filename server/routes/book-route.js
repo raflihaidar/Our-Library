@@ -3,6 +3,7 @@ import multer from "multer";
 import path from "path";
 import {
   getBookData,
+  getDetailBookData,
   addNewBook,
   editBook,
   deleteBook,
@@ -26,6 +27,8 @@ const upload = multer({ storage: storage });
 const router = express.Router();
 
 router.get("/", getBookData);
+
+router.get("/:id", getDetailBookData);
 
 router.post("/", upload.single("img"), addNewBook);
 

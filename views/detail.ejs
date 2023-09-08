@@ -1,1 +1,27 @@
-<h1>Ini detail page</h1>
+<div class="w-[80%] mx-auto border-2 shadow-xl my-10">
+  <div class="flex my-10 justify-evenly">
+    <% data.forEach(item => { %>
+
+    <div>
+      <img src="images/<%= item.img %>" alt="gambar" class="w-[500px]" />
+    </div>
+
+    <div class="flex flex-col gap-y-10 my-5">
+      <span>
+        <label class="font-bold text-xl">Title</label>
+        <p><%= item.title %></p>
+      </span>
+      <span>
+        <label class="font-bold text-xl">Author</label>
+        <p><%= item.author %></p>
+      </span>
+      <span>
+        <label class="font-bold text-xl">Description</label>
+        <div cols="30" rows="10" class="resize-none">
+          <%= item.description %>
+        </div>
+      </span>
+    </div>
+    <% }) %>
+  </div>
+</div>

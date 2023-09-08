@@ -1,5 +1,6 @@
 import {
   getDataFromDb,
+  singleDataFromDb,
   addNewDataFromDb,
   deleteData,
   updateData,
@@ -23,10 +24,30 @@ export const getBookData = async (req, res) => {
   }
 };
 
+export const getDetailBookData = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [data] = await singleDataFromDb(id);
+    res.render("detail", {
+      title: "Halaman Detail",
+      layout: "layout/main-layout",
+      data,
+    });
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addNewBook = async (req, res) => {
   const { body, file } = req;
   try {
     await addNewDataFromDb(body, file);
+    res.redirect(
+      `/add-new-data?body=${encodeURIComponent(body)}&file=${encodeURIComponent(
+        file
+      )}`
+    );
   } catch (error) {
     res
       .json({
