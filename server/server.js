@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import "dotenv/config";
 import {
   addNewBook,
+  deleteBook,
   getBookData,
   getDetailBookData,
 } from "./controller/book-controller.js";
@@ -28,15 +29,19 @@ app.use("/books", Bookrouter);
 app.get("/", getBookData);
 
 app.get("/add-new-data", (req, res) => {
+  const { query } = req;
   res.render("form", {
     title: "Masukkan data baru",
     layout: "layout/main-layout",
+    query,
   });
 });
 
-app.get("/:id", getDetailBookData);
+app.get("/book", getDetailBookData);
 
 app.post("/books", addNewBook);
+
+app.get("/:id", deleteBook);
 
 app.listen(port, () => {
   console.log(`The server is running in ${port}`);

@@ -28,11 +28,11 @@ const router = express.Router();
 
 router.get("/", getBookData);
 
-router.get("/:id", getDetailBookData);
+router.get("/book", getDetailBookData);
 
 router.post("/", upload.single("img"), addNewBook);
 
-router.delete("/:id", deleteBook);
+router.delete("/delete", deleteBook);
 
 router.patch("/:id", editBook);
 

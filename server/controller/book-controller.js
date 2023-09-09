@@ -25,7 +25,7 @@ export const getBookData = async (req, res) => {
 };
 
 export const getDetailBookData = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.query;
   try {
     const [data] = await singleDataFromDb(id);
     res.render("detail", {
@@ -43,11 +43,6 @@ export const addNewBook = async (req, res) => {
   const { body, file } = req;
   try {
     await addNewDataFromDb(body, file);
-    res.redirect(
-      `/add-new-data?body=${encodeURIComponent(body)}&file=${encodeURIComponent(
-        file
-      )}`
-    );
   } catch (error) {
     res
       .json({
@@ -59,16 +54,10 @@ export const addNewBook = async (req, res) => {
 };
 
 export const deleteBook = async (req, res) => {
-  const { id } = req.params;
-  const { body } = req;
+  const { id } = req.query;
   try {
     await deleteData(id);
-    res
-      .json({
-        data: body,
-        message: "Success delete book",
-      })
-      .status(200);
+    res.redirect("/");
   } catch (error) {
     res
       .json({

@@ -1,4 +1,4 @@
-<div class="w-[80%] mx-auto border-2 shadow-xl my-10">
+<div class="w-[80%] mx-auto border-2 shadow-xl my-10 relative">
   <div class="flex my-10 justify-evenly">
     <% data.forEach(item => { %>
 
@@ -22,6 +22,12 @@
         </div>
       </span>
     </div>
+    <button
+      class="absolute bottom-4 right-5 text-red-600"
+      onclick="location.href='/delete?id=<%= item.id %>'"
+    >
+      <%- include("../public/icon/delete-icon") %>
+    </button>
     <% }) %>
   </div>
 </div>
