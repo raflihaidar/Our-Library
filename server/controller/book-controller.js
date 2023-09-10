@@ -9,10 +9,14 @@ import {
 export const getBookData = async (req, res) => {
   try {
     const [data] = await getDataFromDb();
-    res.render("main", {
-      title: "Halaman utama",
-      layout: "layout/main-layout",
-      data,
+    // res.render("main", {
+    //   title: "Halaman utama",
+    //   layout: "layout/main-layout",
+    //   data,
+    // });
+
+    res.json({
+      message: "get data success",
     });
   } catch (error) {
     res
@@ -43,6 +47,7 @@ export const addNewBook = async (req, res) => {
   const { body, file } = req;
   try {
     await addNewDataFromDb(body, file);
+    res.redirect("/");
   } catch (error) {
     res
       .json({

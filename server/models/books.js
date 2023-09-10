@@ -1,7 +1,7 @@
 import { dbPool } from "../config/database.js";
 
 export const getDataFromDb = () => {
-  const SQLquery = "SELECT * FROM directory_books.book";
+  const SQLquery = "SELECT * FROM directory_books.books";
   return dbPool.execute(SQLquery);
 };
 

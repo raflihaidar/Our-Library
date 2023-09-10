@@ -26,7 +26,7 @@ const upload = multer({ storage: storage });
 
 const router = express.Router();
 
-router.get("/", getBookData);
+// router.get("/", getBookData);
 
 router.get("/book", getDetailBookData);
 
