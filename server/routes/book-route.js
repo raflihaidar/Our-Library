@@ -14,7 +14,6 @@ const storage = multer.diskStorage({
     cb(null, "./public/images");
   },
   filename: (req, file, cb) => {
-    console.log(file);
     cb(
       null,
       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
@@ -23,17 +22,16 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
 const router = express.Router();
 
-// router.get("/", getBookData);
+router.get("/", getBookData);
 
-router.get("/book", getDetailBookData);
+router.get("/detail", getDetailBookData);
 
 router.post("/", upload.single("img"), addNewBook);
 
-router.delete("/delete", deleteBook);
+router.delete("/:id", deleteBook);
 
-router.patch("/:id", editBook);
+router.post("/update/:id", upload.single("img"), editBook);
 
 export default router;

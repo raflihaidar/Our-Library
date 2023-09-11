@@ -15,5 +15,6 @@ model Books {
   title       String   @db.VarChar(255)
   author      String   @db.VarChar(255)
   description String?  @db.VarChar(255)
+  image       String   @db.VarChar(255)
   createdAt   DateTime @default(now()) @db.Timestamp(0)
 }

@@ -1,0 +1,53 @@
+<div class="flex justify-between items-start">
+  <form
+    class="w-[60%] my-10 ml-5 grid gap-y-5"
+    enctype="multipart/form-data"
+    action="/books/update/<%= data.id %>"
+    method="POST"
+  >
+    <label class="font-bold text-2xl">Update Data</label>
+    <span class="grid gap-y-2">
+      <label>Title</label>
+      <input
+        type="text"
+        name="title"
+        placeholder="add title"
+        class="border-2 outline-none p-3 rounded-lg text-sm"
+        value="<%= data.title %>"
+      />
+    </span>
+    <span class="grid gap-y-2">
+      <label>Author</label>
+      <input
+        type="text"
+        name="author"
+        placeholder="add author"
+        class="border-2 outline-none p-3 rounded-lg text-sm"
+        value="<%= data.author %>"
+      />
+    </span>
+    <span class="grid gap-y-2">
+      <label>Description</label>
+      <textarea
+        name="description"
+        placeholder="add description"
+        cols="30"
+        rows="10"
+        class="border-2 resize-none outline-none py-3 text-sm rounded-2xl"
+      >
+      <%= data.description %>
+      </textarea>
+    </span>
+    <span class="grid gap-y-2">
+      <label>Image book</label>
+      <img src="/images/<%= data.image %>" alt="gambar" width="300px" />
+      <input type="file" name="img" id="img" accept="image/*" />
+    </span>
+    <button
+      class="bg-orange-400 w-1/6 py-3 px-2 text-white rounded-xl"
+      onclick="location.href='/books/update/<%= data.id %>'"
+    >
+      Send
+    </button>
+  </form>
+</div>

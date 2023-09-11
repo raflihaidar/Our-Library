@@ -1,22 +1,14 @@
-import {
-  getDataFromDb,
-  singleDataFromDb,
-  addNewDataFromDb,
-  deleteData,
-  updateData,
-} from "../models/books.js";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const getBookData = async (req, res) => {
   try {
-    const [data] = await getDataFromDb();
-    // res.render("main", {
-    //   title: "Halaman utama",
-    //   layout: "layout/main-layout",
-    //   data,
-    // });
-
-    res.json({
-      message: "get data success",
+    const data = await prisma.books.findMany();
+    res.render("main", {
+      title: "Our Library",
+      layout: "layout/main-layout",
+      data,
     });
   } catch (error) {
     res
@@ -31,7 +23,11 @@ export const getBookData = async (req, res) => {
 export const getDetailBookData = async (req, res) => {
   const { id } = req.query;
   try {
-    const [data] = await singleDataFromDb(id);
+    const data = await prisma.books.findUnique({
+      where: {
+        id,
+      },
+    });
     res.render("detail", {
       title: "Halaman Detail",
       layout: "layout/main-layout",
@@ -46,7 +42,14 @@ export const getDetailBookData = async (req, res) => {
 export const addNewBook = async (req, res) => {
   const { body, file } = req;
   try {
-    await addNewDataFromDb(body, file);
+    await prisma.books.create({
+      data: {
+        title: body.title,
+        author: body.author,
+        description: body.description,
+        image: file.filename,
+      },
+    });
     res.redirect("/");
   } catch (error) {
     res
@@ -59,9 +62,13 @@ export const addNewBook = async (req, res) => {
 };
 
 export const deleteBook = async (req, res) => {
-  const { id } = req.query;
+  const { id } = req.params;
   try {
-    await deleteData(id);
+    await prisma.books.delete({
+      where: {
+        id,
+      },
+    });
     res.redirect("/");
   } catch (error) {
     res
@@ -75,19 +82,26 @@ export const deleteBook = async (req, res) => {
 
 export const editBook = async (req, res) => {
   const { id } = req.params;
-  const { body } = req;
+  const { body, file } = req;
   try {
-    await updateData(body, id);
-    res
-      .json({
-        data: body,
-        message: "Success edit book",
-      })
-      .status(200);
+    await prisma.books.update({
+      where: {
+        id,
+      },
+      data: {
+        title: body.title,
+        author: body.author,
+        description: body.description,
+        image: file.filename,
+      },
+    });
+    res.redirect("/");
+    console.log(id);
   } catch (error) {
     res
       .json({
         message: "Server Error",
+        serverMessage: error,
       })
       .status(404);
   }

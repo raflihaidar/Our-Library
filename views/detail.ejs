@@ -1,33 +1,39 @@
 <div class="w-[80%] mx-auto border-2 shadow-xl my-10 relative">
   <div class="flex my-10 justify-evenly">
-    <% data.forEach(item => { %>
-
     <div>
-      <img src="images/<%= item.img %>" alt="gambar" class="w-[500px]" />
+      <img src="/images/<%= data.image %>" alt="gambar" class="w-[500px]" />
     </div>
 
     <div class="flex flex-col gap-y-10 my-5">
       <span>
         <label class="font-bold text-xl">Title</label>
-        <p><%= item.title %></p>
+        <p><%= data.title %></p>
       </span>
       <span>
         <label class="font-bold text-xl">Author</label>
-        <p><%= item.author %></p>
+        <p><%= data.author %></p>
       </span>
       <span>
         <label class="font-bold text-xl">Description</label>
         <div cols="30" rows="10" class="resize-none">
-          <%= item.description %>
+          <%= data.description %>
         </div>
       </span>
     </div>
-    <button
-      class="absolute bottom-4 right-5 text-red-600"
-      onclick="location.href='/delete?id=<%= item.id %>'"
-    >
-      <%- include("../public/icon/delete-icon") %>
-    </button>
-    <% }) %>
+    <div class="absolute bottom-4 right-5 flex gap-x-3">
+      <button
+        onclick="location.href='/update-data/<%= data.id %>'"
+        class="bg-orange-400 text-white py-2 px-3 rounded-full"
+      >
+        Update
+      </button>
+      <button
+        class="text-red-600"
+        onclick="location.href='/<%= data.id %>'"
+        id="deleteButton"
+      >
+        <%- include("../public/icon/delete-icon") %>
+      </button>
+    </div>
   </div>
 </div>
